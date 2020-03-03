@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<script>
+</script>
+
+<body>
+	<p id="dname">Name: <input type="text" id="name"></p>
+	<p id="dage">Age: <input type="text" id="age"></p>
+	<p id="dcity">Home City: <input type="text" id="city"></p>
+	<button id="b1" onclick="basics()">Save Name/Age/City</button> <button id="b2" onclick="displayBasics()">Apply</button>
+	<p id="hobby">Hobbies: <select id="hobbies">
+		<option>Tennis</option>
+		<option>Basketball</option>
+		<option>Hockey</option>
+		<option>Badmitton</option>
+		<option>Baseball</option>
+		<option>Football</option>
+		<option>Netball</option>
+	</select> <button id="b3" onclick="hobby()">Add Hobby</button></p>
+	<div id="dhobbies"></div>
+
+	<button onclick="clear()">Clear</button>
+
+	
+</body>
+
+<script>
+
+function basics() {
+	var name = document.getElementById("name").value;
+	var age = document.getElementById("age").value;
+	var city = document.getElementById("city").value;
+
+	
+	
+	localStorage.name = name;
+	localStorage.age = age;
+	localStorage.city = city;
+
+	alert("Saved " + name + " to localStorage.");
+	document.getElementById("b1").style.display = "none";
+}
+
+function displayBasics() {
+	document.getElementById("dname").innerHTML = "Name: " + localStorage.name;
+	document.getElementById("dage").innerHTML = "Age: " + localStorage.age;
+	document.getElementById("dcity").innerHTML = "City: " + localStorage.city;
+	document.getElementById("b2").style.display = "none";
+}
+
+function hobby() {
+	var hobby = document.getElementById("hobbies").value;
+	var hobbies = [];
+	if (localStorage["hobbies"]) {
+		hobbies = JSON.parse(localStorage["hobbies"]);
+	}/*
+	for (var i = 0; i < hobbies.length; i++) {
+		if (hobbies[i] == hobby) {
+			alert("Already have that hobby.");
+			return;
+		}
+	}*/
+	hobbies.push(hobby);
+	console.log(hobby);
+	localStorage["hobbies"] = JSON.stringify(hobbies);
+	updateHobbies();
+}
+
+function clear() {
+	localStorage.removeItem("hobbies");
+	console.log("Cleared.");
+}
+
+function updateHobbies() {
+	if (localStorage["hobbies"]) {
+		var hobbies = JSON.parse(localStorage["hobbies"]);
+
+		var list = "<ul>"
+		hobbies.forEach(function(x, i) {
+			list += "<li>" + x + "</li>";
+		})
+		list += "</ul>";
+
+		console.log(list);
+		document.getElementById("dhobbies").innerHTML = list;
+	}
+	else {
+		document.getElementById("dhobbies").innerHTML = "";
+	}
+}
+</script>
+
+</html>
