@@ -24,6 +24,7 @@ function javascript() {
 	});
 }
 	/*************END OF JAVASCRIPT SECTION***************/
+
 	/*************JAVASCRIPT OBJECTS SECTION***************/
 function objects() {
 	var object = {
@@ -54,8 +55,9 @@ function objects() {
 
 
 }
-	/*************END OF JAVASCRIPT OBJECTS SECTION***************/
+/*************END OF JAVASCRIPT OBJECTS SECTION***************/
 
+/*************DOM SECTION***************/
 function DOM(step) {
 	var parent = document.getElementById("parent");
 	var p = document.createElement("p");
@@ -84,7 +86,9 @@ function DOM(step) {
 		document.getElementById("DOM3").style.display = "none";
 	}
 }
+/*************END OF DOM SECTION***************/
 
+/*************CSS Manipulation with JS SECTION***************/
 function CSSbyJS() {
 	var table = document.getElementById("table");
 	var names = document.getElementsByClassName("name");
@@ -103,6 +107,23 @@ function CSSbyJS() {
 	addrs[0].style.color = "white";
 	addrs[1].style.background = "pink";
 }
+/*************END OF CSS Manipulation with JS SECTION***************/
+
+/*************Video, Audio, Canvas SECTION***************/
+function gradient() {
+	var canvas = document.getElementById("canvas");
+	var context = canvas.getContext("2d");
+	var gradient = context.createLinearGradient(0, 0, 200, 100);
+	var c1 = document.getElementById("c1").value;
+	var c2 = document.getElementById("c2").value;
+	gradient.addColorStop(0, c1);
+	gradient.addColorStop(.5, "white");
+	gradient.addColorStop(1, c2);
+
+	context.fillStyle = gradient;
+	context.fillRect(0, 0, 200, 100);
+}
+/*************END OF Video, Audio, Canvas SECTION***************/
 
 </script>
 </head>
@@ -144,23 +165,16 @@ function CSSbyJS() {
 	<button onclick="CSSbyJS()">Beautify with CSS!</button>
 
 	<h1>HTML5 Tags Video, Audio, Canvas</h1>
-	
-	<button onclick=""></button>
+	<p>Video tag operates almost exactly like an Image tag, wherein the source must be defined as well as the size. Additionally, you can define if the video control options appear, if the video should autoplay and many other features.</p>
+	<p>Audio tag operates almost identically to Video, save it plays audio instead of video.</p>
+	<p>Putting text in between the opening and closing Video/Audio tags is text that will be displayed if the browser is incapable of displaying the video/audio due to compatability or other issues.</p>
+	<p>Canvas is a whole different beast and will be the example here:</p>
+	<canvas id="canvas" width="200" height="100" style="border:1px solid #000000;">
+	</canvas>
 
-	<h1></h1>
-	<button onclick=""></button>
+	<p>Select two colors: <input id="c1" type="color"> <input id="c2" type="color"></p>
 
-	<h1></h1>
-	<button onclick=""></button>
-
-	<h1></h1>
-	<button onclick=""></button>
-
-	<h1></h1>
-	<button onclick=""></button>
-
-	<h1></h1>
-	<button onclick=""></button>
+	<button onclick="gradient()">Apply</button>
 
 </body>
 </html>
