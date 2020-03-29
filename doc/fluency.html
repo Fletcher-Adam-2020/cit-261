@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fluency</title>
+<script>
+	var person;
+	/*************JAVASCRIPT SECTION***************/
+function javascript() {
+	// Loops, Conditional Statements, Functions, Variables, Parameters, Arrays, Associative Arrays
+	var array = ["item1", "item2", "item3"]; // Brackets designate an array object.
+	var associativeArray = []; // JS array does not support named keys.
+	associativeArray[0] = "item4";
+	associativeArray[1] = "item5";
+	associativeArray[2] = "item6";
+
+	//simple check and loop.
+	if (array.length > 0) {
+		for (var i = 0; i < array.length; i++)
+			console.log(array[i] + "\n");
+	}
+	// Arrays also have a forEach method that calls a function for each item in the array.
+	associativeArray.forEach(function(value) {
+		console.log(value + "\n");
+	});
+}
+	/*************END OF JAVASCRIPT SECTION***************/
+
+	/*************JAVASCRIPT OBJECTS SECTION***************/
+function objects() {
+	var object = {
+		streetNum: 314,
+		street: "12th Ave N",
+		city: "Nampa",
+		state: "ID",
+		zip: 83687,
+		address: function() {
+			return this.streetNum + " " + this.street + "<br>" + this.city + ", " + this.state + " " + this.zip;
+		}
+	}
+
+	var address = "" + object.address();
+	console.log(address);
+	console.log("Now let's create a person object and add the address object to it.");
+
+	//Objects can hold other objects.
+	// Let's make a person, and add the address object to it.
+	//NOTE: Person is already declared to allow for later use.
+	person = {
+		name: "George",
+		age: 43
+	}
+	person["address"] = object;
+
+	// Console.log the results.
+	console.log(person.name + "\n" + person.age + "\n" + person.address.address());
+}
+/*************END OF JAVASCRIPT OBJECTS SECTION***************/
+
+/*************DOM SECTION***************/
+function DOM(step) {
+	var parent = document.getElementById("parent");
+	var p = document.createElement("p");
+	if (step == 1) {
+		objects(); // Call objects() to ensure the Person object is created.
+		
+		var node = document.createTextNode("Name: " + person.name + "\nAge: " +  person.age + "\n" + person.address.address() + " I know, it's kinda slammed together. But hey, look. The button changed to Step 2!");
+		p.appendChild(node);
+		parent.appendChild(p);
+		document.getElementById("DOM").style.display = "none";
+		document.getElementById("DOM2").style.display = "block";
+	}
+
+	if (step == 2) {
+		parent.innerHTML = "Name: " 
+			+ person.name + "<br>Age: " +  person.age 
+			+ "<br>" + person.address.address() 
+			+ "<br><br>Wow, that looks a lot better! But wait, there's a step 3?";
+		document.getElementById("DOM2").style.display = "none";
+		document.getElementById("DOM3").style.display = "block";
+	}
+
+	if (step == 3) {
+		parent.remove();
+		alert("Oh no, apparently we're deleting everything! Even the button will disappear!");
+		document.getElementById("DOM3").style.display = "none";
+	}
+}
+/*************END OF DOM SECTION***************/
+
+/*************CSS Manipulation with JS SECTION***************/
+function CSSbyJS() {
+	var table = document.getElementById("table");
+	var names = document.getElementsByClassName("name");
+	var ages = document.getElementsByClassName("age");
+	var addrs = document.getElementsByClassName("addr");
+
+	table.style.border = "grey dotted 6px";
+	table.style.padding = "4px";
+	names[0].style.background = "darkblue";
+	names[0].style.color = "white";
+	names[1].style.background = "lightblue";
+	ages[0].style.background = "darkgreen";
+	ages[0].style.color = "white";
+	ages[1].style.background = "lightgreen";
+	addrs[0].style.background = "darkred";
+	addrs[0].style.color = "white";
+	addrs[1].style.background = "pink";
+}
+/*************END OF CSS Manipulation with JS SECTION***************/
+
+/*************Video, Audio, Canvas SECTION***************/
+function gradient() {
+	var canvas = document.getElementById("canvas");
+	var context = canvas.getContext("2d");
+	var gradient = context.createLinearGradient(0, 0, 200, 100);
+	var c1 = document.getElementById("c1").value;
+	var c2 = document.getElementById("c2").value;
+	gradient.addColorStop(0, c1);
+	gradient.addColorStop(.5, "white");
+	gradient.addColorStop(1, c2);
+
+	context.fillStyle = gradient;
+	context.fillRect(0, 0, 200, 100);
+}
+/*************END OF Video, Audio, Canvas SECTION***************/
+
+</script>
+</head>
+<body>
+
+	<h1>Javascript</h1>
+	<p>Loops, Conditional Statements, Functions, Variables, Parameters, Arrays, Associative Arrays</p>
+	<p>Screenshot of code attached. Push the button and open the console to see results.</p>
+	<img src="https://puu.sh/Fj6KQ/323289cb94.png" style="width:600px; height:auto;"><br>
+	<button onclick="javascript()">Javascript</button>
+
+	<h1>Javascript Objects</h1>
+	<p>Object Creation Functions, Inheritance, Properties, Methods, Instantiation</p>
+	<p>Screenshot of code attached. Push the button and open the console to see results.</p>
+	<img src="https://puu.sh/Fj6OF/e0da283efe.png" style="width:600px; height:auto;"><br>
+	<button onclick="objects()">JS Objects</button>
+
+	<h1>DOM Using Javascript</h1>
+	<p>DOM Manipulation Using createElement, appendChild, insertBefore, removeChild, etc.</p>
+	<div id="master">
+		<p id="parent">Let's start DOM!</p>
+	</div>
+	<button id="DOM" onclick="DOM(1)">Start DOM Step 1</button>
+	<button id="DOM2" onclick="DOM(2)" style="display:none">DOM Step 2</button>
+	<button id="DOM3" onclick="DOM(3)" style="display:none">Wow! Step 3</button>
+
+	<h1>CSS3 Styles Changing</h1>
+	<p>Manipulating CSS Class Properties Using JavaScript</p>
+	<table id="table">
+		<tr>
+			<th class="name">Name</th>
+			<th class="age">Age</th>
+			<th class="addr">Address</th>
+		</tr>
+		<tr>
+			<td class="name">George</td>
+			<td class="age">43</td>
+			<td class="addr">314 12th Ave N<br>Nampa, ID 83687</td>
+		</tr>
+	</table>
+	<button onclick="CSSbyJS()">Beautify with CSS!</button>
+
+	<h1>HTML5 Tags Video, Audio, Canvas</h1>
+	<p>Video tag operates almost exactly like an Image tag, wherein the source must be defined as well as the size. Additionally, you can define if the video control options appear, if the video should autoplay and many other features.</p>
+	<p>Audio tag operates almost identically to Video, save it plays audio instead of video.</p>
+	<p>Putting text in between the opening and closing Video/Audio tags is text that will be displayed if the browser is incapable of displaying the video/audio due to compatability or other issues.</p>
+	<p>Canvas is a whole different beast and will be the example here:</p>
+	<canvas id="canvas" width="200" height="100" style="border:1px solid #000000;">
+	</canvas>
+
+	<p>Select two colors: <input id="c1" type="color"> <input id="c2" type="color"></p>
+
+	<button onclick="gradient()">Apply</button>
+
+</body>
+</html>
